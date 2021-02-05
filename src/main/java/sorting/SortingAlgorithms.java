@@ -67,7 +67,7 @@ public class SortingAlgorithms {
         }
     }
 
-    /**
+    /** --- Not  covered in cs245 -----------
      * Sort a given array using shell sort and n/2, n/4, n/8 etc increments. The
      * code is modified from the code of Prof. Galles.
      */
@@ -109,7 +109,6 @@ public class SortingAlgorithms {
         // selectionSort(array);
         // bubbleSort(array);
         insertionSort(array);
-        // shellSort(array);
         System.out.println(Arrays.toString(array));
     }
 }
