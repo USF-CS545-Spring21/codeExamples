@@ -103,6 +103,103 @@ public class SortingAlgorithms {
         }
     }
 
+
+    public static int[] merge(int[] arr1, int[] arr2) {
+
+        int[] temp = new int[arr1.length + arr2.length];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while (k <= arr1.length + arr2.length) {
+            if (i > arr1.length) {// ran out of elements in the i list
+                temp[k] = arr2[j];
+                k++;
+                j++;
+            } else if (j > arr2.length) {// ran out of elements in the j list
+                temp[k] = arr1[i];
+                k++;
+                i++;
+            } else if (arr1[i] < arr2[j]) { // place arr[i] in temp, move i
+                temp[k] = arr1[i];
+                k++;
+                i++;
+            } else {
+                temp[k] = arr2[j]; // place arr[j] in temp, move j
+                k++;
+                j++;
+            }
+        }
+        return temp;
+    }
+
+    /** public method for mergeSort - called from outside of the class */
+    public static void mergeSort(int[] arr) {
+        int[] temp = new int[arr.length];
+        mergeSort(arr, temp, 0, arr.length - 1);
+    }
+
+    /**
+     * A private mergeSort method - takes an array, a temporary array, and the
+     * indices that specify what part of the list we are working with (we need
+     * to sort the part from low to high)
+     *
+     * @param arr
+     * @param temp
+     * @param low
+     * @param high
+     */
+    private static void mergeSort(int[] arr, int[] temp, int low, int high) {
+        if (low >= high)
+            return;
+        // divide in half
+        int mid = (low + high) / 2;
+        mergeSort(arr, temp, low, mid);
+        mergeSort(arr, temp, mid + 1, high);
+
+
+        merge(arr, temp, low, mid, high); // merge two sorted halves into one
+        // sorted list
+    }
+
+    /**
+     * Merge two sorted sublists together, one that goes from low to mid another
+     * goes from mid+1 to high. Uses a temporary array.
+     *
+     * @param arr
+     * @param temp
+     * @param low
+     * @param mid
+     * @param high
+     */
+    public static void merge(int[] arr, int[] temp, int low, int mid, int high) {
+        int k = low;
+        int i = low;
+        int j = mid + 1;
+        while (k <= high) {
+            if (i > mid) {// ran out of elements in the i sublist
+                temp[k] = arr[j];
+                k++;
+                j++;
+            } else if (j > high) {// ran out of elements in the j sublist
+                temp[k] = arr[i];
+                k++;
+                i++;
+            } else if (arr[i] < arr[j]) { // place arr[i] in temp, move i
+                temp[k] = arr[i];
+                k++;
+                i++;
+            } else {
+                temp[k] = arr[j]; // place arr[j] in temp, move j
+                k++;
+                j++;
+            }
+        }
+        // copy the result from temp back to arr
+        for (k = low; k <= high; k++)
+            arr[k] = temp[k];
+    }
+
     public static void main(String[] args) {
         int[] array = {5, 0, 1, 15, 4, 26, 3, 9, 7, 2};
 
