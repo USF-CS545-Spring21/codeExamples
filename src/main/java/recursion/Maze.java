@@ -51,7 +51,7 @@ public class Maze
             if (done)  // this location is part of the final path
                 grid[row][column] = PATH;
         }
-        System.out.println(this);
+        // System.out.println(this);
         return done;
     }
 

@@ -17,7 +17,6 @@ public class RecursionExamples {
     }
 
     public static String reverse(String s) {
-        // FILL IN CODE
         int n = s.length();
         if (n == 1)
             return s;
@@ -38,6 +37,7 @@ public class RecursionExamples {
     }
 
     public static void main(String[] args) {
+        System.out.println(reverse("hello"));
         System.out.println(convertDigitalToBinary(5, ""));
     }
 }
