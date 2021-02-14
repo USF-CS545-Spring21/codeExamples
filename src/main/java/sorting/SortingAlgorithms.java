@@ -55,6 +55,7 @@ public class SortingAlgorithms {
     public static void insertionSort(int[] arr) {
         if (arr == null)
             return;
+
         for (int i = 1; i < arr.length; i++) {
             int curr = arr[i];
             // Compare with elements of the sorted list, starting at i - 1;
@@ -103,20 +104,24 @@ public class SortingAlgorithms {
         }
     }
 
-
+    /** An exercise we did in class - merges two sorted arrays together. Not used in any sorting method.
+     * See merge(int[] arr, int[] temp, int low, int mid, int high)  instead.
+     * @param arr1 sorted array 1
+     * @param arr2 sorted array 2
+     * @return sorted array that combines elements from arr1 and arr2
+     */
     public static int[] merge(int[] arr1, int[] arr2) {
 
         int[] temp = new int[arr1.length + arr2.length];
         int i = 0;
         int j = 0;
         int k = 0;
-
-        while (k <= arr1.length + arr2.length) {
-            if (i > arr1.length) {// ran out of elements in the i list
+        while (k < arr1.length + arr2.length) {
+            if (i >= arr1.length) {// ran out of elements in the i list
                 temp[k] = arr2[j];
                 k++;
                 j++;
-            } else if (j > arr2.length) {// ran out of elements in the j list
+            } else if (j >= arr2.length) {// ran out of elements in the j list
                 temp[k] = arr1[i];
                 k++;
                 i++;
@@ -130,6 +135,7 @@ public class SortingAlgorithms {
                 j++;
             }
         }
+
         return temp;
     }
 
@@ -157,25 +163,27 @@ public class SortingAlgorithms {
         mergeSort(arr, temp, low, mid);
         mergeSort(arr, temp, mid + 1, high);
 
-
         merge(arr, temp, low, mid, high); // merge two sorted halves into one
         // sorted list
+        System.out.println(Arrays.toString(arr));
+
     }
 
     /**
-     * Merge two sorted sublists together, one that goes from low to mid another
+     * A helper method used in Merge Sort.
+     * Merges two sorted sublists together, one that goes from low to mid, another
      * goes from mid+1 to high. Uses a temporary array.
      *
-     * @param arr
+     * @param arr input array
      * @param temp
-     * @param low
-     * @param mid
-     * @param high
+     * @param low index where the first sorted sublist starts
+     * @param mid index where the first sorted sublist ends
+     * @param high index where the second sorted sublist ends
      */
     public static void merge(int[] arr, int[] temp, int low, int mid, int high) {
-        int k = low;
+        int k = low; // the index in the temp array we will use for merging
         int i = low;
-        int j = mid + 1;
+        int j = mid + 1; // where the second list starts
         while (k <= high) {
             if (i > mid) {// ran out of elements in the i sublist
                 temp[k] = arr[j];
@@ -201,11 +209,12 @@ public class SortingAlgorithms {
     }
 
     public static void main(String[] args) {
-        int[] array = {5, 0, 1, 15, 4, 26, 3, 9, 7, 2};
-
+        int[] array = {17, 10, 15, 13, 4, 12, 7, 9, 16, 8, 5, 14, 3};
+        System.out.println(Arrays.toString(array));
         // selectionSort(array);
         // bubbleSort(array);
-        insertionSort(array);
+        // insertionSort(array);
+        mergeSort(array);
         System.out.println(Arrays.toString(array));
     }
 }
