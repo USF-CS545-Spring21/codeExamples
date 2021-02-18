@@ -208,6 +208,97 @@ public class SortingAlgorithms {
             arr[k] = temp[k];
     }
 
+
+    public static void sortAB (String[] letters) {
+        int i = 0;
+        int j = letters.length - 1;
+        while (i < j ) {
+            while (i < j  && letters[i].equals("A"))
+                    i++;
+            while (i < j  && letters[j].equals("B"))
+                j--;
+            if (i < j) {
+                letters[i] = "A";
+                letters[j] = "B";
+                i++;
+                j--;
+            }
+        }
+    }
+
+        /**
+         * Quick sort - public method
+         * @param arr input array if integers
+         */
+    public static void quickSort(int arr[]) {
+        quickSort(arr, 0, arr.length - 1);
+    }
+
+    /**
+     * Quick sort implementation. Uses partition as a helper method.
+     * @param arr array of integers
+     * @param low index of the first element of the sub-array to sort
+     * @param high index of the last element of the sub-array to sort
+     */
+    private static void quickSort(int arr[], int low, int high) {
+        int indexOfPivot;
+        if (low <= high) {
+            indexOfPivot = partition(arr, low, high); // the index of pivot element
+            System.out.println("Pivot: " + arr[indexOfPivot]);
+            System.out.println(Arrays.toString(arr));
+            quickSort(arr, low, indexOfPivot - 1);
+            quickSort(arr, indexOfPivot + 1, high);
+        }
+    }
+
+    /**
+     * Helper method for the quick sort. Rearranges the array so that it
+     * first has elements < pivot, then pivot, and then elements >= pivot.
+     * Chooses the middle element as the pivot.
+     * @param arr array
+     * @param low index of the first element of the sub-array
+     * @param high index of the last element of the sub-array
+     * @return index of the pivot after partition
+     */
+    public static int partition(int arr[], int low, int high) {
+        int mid = (low + high) / 2;
+        int pivotElem = arr[mid];
+
+        // Swap pivot with the element at the last index
+        int tmp = arr[high];
+        arr[high] = pivotElem;
+        arr[mid] = tmp;
+
+        int i = low;
+        int j = high - 1;
+        while (i <= j) {
+            while ( (arr[i] < pivotElem))
+                i++;
+
+            while ((j >= low) && (arr[j] >= pivotElem))
+                j--;
+
+            if (i > j)
+                break;
+            else { // swap elements at indices i and j
+                tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+                i++;
+                j--;
+            }
+        } // while
+        if (i > j) {
+            // swap arr[i] and last elem
+            tmp = arr[i];
+            arr[i] = arr[high];
+            arr[high] = tmp;
+        }
+        return i;
+    }
+
+
+
     public static void main(String[] args) {
         int[] array = {17, 10, 15, 13, 4, 12, 7, 9, 16, 8, 5, 14, 3};
         System.out.println(Arrays.toString(array));
@@ -216,5 +307,8 @@ public class SortingAlgorithms {
         // insertionSort(array);
         mergeSort(array);
         System.out.println(Arrays.toString(array));
+        String[] letters = {"A", "B", "A", "A", "B", "A", "B", "B", "B", "A", "B"};
+        sortAB(letters);
+        System.out.println(Arrays.toString(letters));
     }
 }
