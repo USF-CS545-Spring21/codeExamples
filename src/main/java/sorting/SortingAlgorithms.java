@@ -208,24 +208,6 @@ public class SortingAlgorithms {
             arr[k] = temp[k];
     }
 
-
-    public static void sortAB (String[] letters) {
-        int i = 0;
-        int j = letters.length - 1;
-        while (i < j ) {
-            while (i < j  && letters[i].equals("A"))
-                    i++;
-            while (i < j  && letters[j].equals("B"))
-                j--;
-            if (i < j) {
-                letters[i] = "A";
-                letters[j] = "B";
-                i++;
-                j--;
-            }
-        }
-    }
-
         /**
          * Quick sort - public method
          * @param arr input array if integers
@@ -272,15 +254,13 @@ public class SortingAlgorithms {
         int i = low;
         int j = high - 1;
         while (i <= j) {
-            while ( (arr[i] < pivotElem))
+            while ((i <= j) &&(arr[i] < pivotElem))
                 i++;
 
-            while ((j >= low) && (arr[j] >= pivotElem))
+            while ((i <= j) && (arr[j] >= pivotElem))
                 j--;
 
-            if (i > j)
-                break;
-            else { // swap elements at indices i and j
+            if (i <= j) { // swap elements at indices i and j
                 tmp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = tmp;
@@ -300,15 +280,15 @@ public class SortingAlgorithms {
 
 
     public static void main(String[] args) {
-        int[] array = {17, 10, 15, 13, 4, 12, 7, 9, 16, 8, 5, 14, 3};
+        int[] array = {3, 1, 9, 4, 7, 0, 6, 5, 8}; //{17, 10, 15, 13, 4, 12, 7, 9, 16, 8, 5, 14, 3};
         System.out.println(Arrays.toString(array));
         // selectionSort(array);
         // bubbleSort(array);
         // insertionSort(array);
         mergeSort(array);
+
+        // quickSort(array);
         System.out.println(Arrays.toString(array));
-        String[] letters = {"A", "B", "A", "A", "B", "A", "B", "B", "B", "A", "B"};
-        sortAB(letters);
-        System.out.println(Arrays.toString(letters));
+
     }
 }
