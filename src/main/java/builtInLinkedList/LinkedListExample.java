@@ -17,6 +17,7 @@ public class LinkedListExample {
             int elem = it.next();
             System.out.println(elem);
         }
+
         //list.add(2, 999);
         //System.out.println(list);
 

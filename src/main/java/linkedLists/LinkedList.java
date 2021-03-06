@@ -35,6 +35,38 @@ public class LinkedList {
 
 	}
 
+	/**
+	 * Insert a given element at index i in the linked list
+	 * @param index index where to insert
+	 * @param elem element to insert
+	 */
+	public void insert(int index, int elem) {
+		Node newNode = new Node(elem);
+		if (head == null) {
+			head = newNode;
+			tail = newNode;
+		}
+		else if (index == 0) {
+			newNode.setNext(head);
+			head =  newNode;
+		}
+		else {
+				Node prev = head;
+				int count = 0;
+				while (prev != null && count < index - 1) {
+					prev = prev.next();
+					count++;
+				}
+			    System.out.println("prev = " + prev.elem());
+
+				if (prev != null) {
+						//System.out.println(curr.elem());
+						newNode.setNext(prev.next());
+						prev.setNext(newNode);
+				}
+			}
+
+	}
 	/** Prints all the nodes in the link list */
 	public void printNodes() {
 		Node current = head;
@@ -42,6 +74,7 @@ public class LinkedList {
 			System.out.print(current.elem() + " ");
 			current = current.next();
 		}
+		System.out.println();
 
 	}
 
@@ -49,13 +82,13 @@ public class LinkedList {
 	public boolean find(int elem) {
 		Node current = head;
 		while (current != null) {
-			if (current.elem() == elem) {
+			if (current.elem() == elem)
 				return true;
-			}
 			current = current.next();
 		}
 		return false;
 	}
+
 
 	/**
 	 * Remove the node after "previousNode". Return the value of the element at
@@ -88,6 +121,17 @@ public class LinkedList {
 		list.insertAtFront(15);
 		list.insertAtFront(34);
 		list.printNodes();
+		// System.out.println(list.find(1));
+		System.out.println();
+		list.insert(0, 4);
+		list.printNodes();
+		list.insert(1, 5);
+		list.printNodes();
+		list.insert(3, 88);
+		list.printNodes();
+		list.insert(5, 100);
+		list.printNodes();
+
 	}
 
 }
